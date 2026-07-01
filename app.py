@@ -12,7 +12,6 @@ tab1, tab2 = st.tabs(["👥 メンバー検索", "📖 ゴリクラ用語辞典"
 # ==========================================
 # 【データ読み込み】Googleスプレッドシートからリアルタイム取得
 # ==========================================
-# あなたが作ってくれたスプレッドシートのCSVエクスポート用URL
 sheet_url = "https://docs.google.com/spreadsheets/d/1JEE6S3FZ3K1ACHgWL9hlWDMWF90Q_deZk8KkW3wFaeA/export?format=csv&gid=1344988261"
 
 @st.cache_data(ttl=10)  # 10秒ごとに最新のデータをスプレッドシートに見に行く設定
@@ -47,7 +46,7 @@ def load_member_data():
                 continue
         return database
     except Exception as e:
-        st.error(f"スプレッドシートの読み込みに失敗しました。URLの設定や共有範囲を確認してください。")
+        st.error("スプレッドシートの読み込みに失敗しました。URLの設定や共有範囲を確認してください。")
         return {}
 
 member_database = load_member_data()
@@ -62,7 +61,7 @@ with tab1:
 
     # 🔗 Googleフォームへのリンク
     form_url = "https://docs.google.com/forms/d/135e8hQbnsHXjOpKhfEDMbXoBYoe1YuDizTWA0nF0Lxs/viewform"
-    st.markdown(f"💡 **新メンバーや、検索しても名前が出ない方はこちらから登録してね！**")
+    st.markdown("💡 **新メンバーや、検索しても名前が出ない方はこちらから登録してね！**")
     st.link_button("📝 メンバー情報 登録フォームを開く", form_url)
     st.write("---")
 
@@ -76,7 +75,7 @@ with tab1:
             for name, info in member_database.items():
                 is_name_match = (search_member.lower() == name.lower())
                 is_nickname_match = ("通称" in info and any(search_member.lower() == n.lower() for n in info["通称"]))
-                is_tag_match = (search_member.lower() == info.get('tag', '').lower())
+                is_tag_match = (search_member.lower() == str(info.get("tag", "")).lower())
                 
                 if is_name_match or is_nickname_match or is_tag_match:
                     found_member = info
@@ -129,7 +128,7 @@ with tab2:
         },
         "シーズン": {
             "読み": "しーずん",
-            "解説": "ゴリクラのワールドは何故か時間の経過とともに過疎化が進む傾向にあり、定期的にワールドやテーマを変更することで再興している。この一区切りを1シーズンとして、基本的に「シーズン12」のように前のシーズンに1を足した自然数を用いて表されるが、深刻なバグや重さにより著しく短期間で終わった場合には0.5刻みとして小数点シーズンとなることもある。、、、と言う説明に現在ではなるのだが、初代管理者がRealmsの更新をわすれ、ワールドにアクセスできなくなったことがシーズン制になった要因で、さらに言えば初期シーズンの終了は大抵過疎化以外の原因である。"
+            "解説": "ゴリクラのワールド何故か時間の経過とともに過疎化が進む傾向にあり、定期的にワールドやテーマを変更することで再興している。この一区切りを1シーズンとして、基本的に「シーズン12」のように前のシーズンに1を足した自然数を用いて表されるが、深刻なバグや重さにより著しく短期間で終わった場合には0.5刻みとして小数点シーズンとなることもある。、、、と言う説明に現在ではなるのだが、初代管理者がRealmsの更新をわすれ、ワールドにアクセスできなくなったことがシーズン制になった要因で、さらに言えば初期シーズンの終了は大抵過疎化以外の原因である。"
         },
         "選挙": {
             "読み": "せんきょ",
@@ -149,7 +148,7 @@ with tab2:
         },
         "つちのこ構文": {
             "読み": "つちのここうぶん",
-            "解説": "がの(つちのこ)氏によってオプチャに送信された長文章。つちのこぴぺが謝辞や挨拶に用いられる形なのに対し、こちらは告知に近い形で、おもにアミューズメント施設「つちのこトロッコ」関連に用いられる。絵文字が多く用いられ、非常に目を引文になっています"
+            "解説": "がの(つちのこ)氏によってオプチャに送信された長文章。つちのこぴぺが謝辞や挨拶に用いられる形なのに対し、こちらは告知に近い形で、おもにアミューズメント施設「つちのこトロッコ」関連に用いられる。絵文字が多く用いられ、非常に目を引く文になっています"
         },
         "つちのこぴぺ": {
             "読み": "つちのこぴぺ",
@@ -185,5 +184,4 @@ with tab2:
         st.write("💡 **用語一覧（クリックで開閉）**")
         for word, data in dictionary_data.items():
             with st.expander(f"【{word}】 （{data['読み']}）"):
-                st.write(data["解説"])
-                
+                st.write(data["解説"])              
