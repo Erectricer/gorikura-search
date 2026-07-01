@@ -76,7 +76,7 @@ with tab1:
             for name, info in member_database.items():
                 is_name_match = (search_member.lower() == name.lower())
                 is_nickname_match = ("通称" in info and any(search_member.lower() == n.lower() for n in info["通称"]))
-                is_tag_match = (search_member.lower() == info.get("tag", "").lower())
+                is_tag_match = (search_member.lower() == info.get('tag', '').lower())
                 
                 if is_name_match or is_nickname_match or is_tag_match:
                     found_member = info
@@ -88,14 +88,14 @@ with tab1:
                 st.markdown(f"**🆔 ゲーマータグ:** `{found_member.get('tag', 'なし')}`")
                 st.markdown(f"**📅 参加時期:** {found_member.get('season', '不明')}")
                 st.markdown(f"**👑 区分:** {found_member.get('type', 'メンバー')}")
-                if "通注" in found_member and len(found_member["通称"]) > 1:
+                if "通称" in found_member and len(found_member["通称"]) > 1:
                     st.info(f"**💡 その他の通称:** {', '.join(found_member['通称'])}")
             else:
                 st.error("❌ その名前やタグのメンバーは見つかりませんでした！上のフォームから登録をお願いします。")
 
 
 # ==========================================
-# 【タブ2】用語辞典の処理（ノートの注記を削除）
+# 【タブ2】用語辞典の処理
 # ==========================================
 with tab2:
     st.header("📖 ゴリクラ用語辞典")
@@ -137,7 +137,7 @@ with tab2:
         },
         "卒業": {
             "読み": "そつぎょう",
-            "解説": "受験期などのやむえない事情により1年など長期間ゴリクラを離れること。とくに休止期間の開始が3月の場合。以下の関連語がある。ちなみに著著者卒業生の名前にちなんだものを食べたりする。プリンとじゅがいもが卒業した時はプリンアイスとポテロングをいただいた。\n\nこれに伴って開催される儀式的行事→【卒業式】\n活動を休止する人物→【卒業生】"
+            "解説": "受験期などのやむえない事情により1年など長期間ゴリクラを離れること。とくに休止期間の開始が3月の場合。以下の関連語がある。ちなみに著者は卒業生の名前にちなんだものを食べたりする。プリンとじゅがいもが卒業した時はプリンアイスとポテロングをいただいた。\n\nこれに伴って開催される儀式的行事→【卒業式】\n活動を休止する人物→【卒業生】"
         },
         "大百科": {
             "読み": "だいひゃっか",
@@ -149,7 +149,7 @@ with tab2:
         },
         "つちのこ構文": {
             "読み": "つちのここうぶん",
-            "解説": "がの(つちのこ)氏によってオプチャに送信された長文章。つちのこぴぺが謝辞や挨拶に用いられる形なのに対し、こちらは告知に近い形で、おもにアミューズメント施設「つちのこトロッコ」関連に用いられる。絵文字が多く用いられ、非常に目を引く文になっている"
+            "解説": "がの(つちのこ)氏によってオプチャに送信された長文章。つちのこぴぺが謝辞や挨拶に用いられる形なのに対し、こちらは告知に近い形で、おもにアミューズメント施設「つちのこトロッコ」関連に用いられる。絵文字が多く用いられ、非常に目を引文になっています"
         },
         "つちのこぴぺ": {
             "読み": "つちのこぴぺ",
@@ -186,3 +186,4 @@ with tab2:
         for word, data in dictionary_data.items():
             with st.expander(f"【{word}】 （{data['読み']}）"):
                 st.write(data["解説"])
+                
