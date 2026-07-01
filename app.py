@@ -65,7 +65,7 @@ with tab1:
     st.write("ゲーマータグ、代表名、通称（あだ名）のどれからでも検索できます。")
 
     # 🔗 ユーザーが要望してくれた「Googleフォームへのリンク」を設置！
-    form_url = "https://docs.google.com/forms/d/135e8hQbnsHXjOpKhfEDMbXoBYoe1YuDizTWA0nF0Lxs/viewform"
+    form_url = "https://docs.google.com/forms/d/e/1FAIpQLSfW0z4JiD68wGFbCda08nvZLIEmDU2lGFQZOBGSMLapsrALoA/viewform?usp=dialog"
     st.markdown(f"💡 **新メンバーや、検索しても名前が出ない方はこちらから登録してね！**")
     st.link_button("📝 メンバー情報 登録フォームを開く", form_url)
     st.write("---")
